@@ -1,0 +1,41 @@
+﻿@model ICollection<Academy.Domain.ViewModels.Subscribes.ShowSubscribeViewModel>
+<section class="section" id="demo">
+    <div class="container">
+        <div class="card bg-light rounded border-0 overflow-hidden">
+
+        </div>
+    </div>
+
+    <div class="container mt-100 mt-60">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <div class="section-title mb-4 pb-2">
+                    <h4 class="title mb-4">کانال سیگنال کوین گلس</h4>
+                    <p class="text-muted para-desc mb-0 mx-auto">
+                        کانال سیگنال <span class="text-primary fw-bold">کوین گلس </span> با یک تیم چهار نفره در زمینه تکنیکال و
+                        داده های درون شبکه به شما کمک میکند که معاملات بهتر و سودآور تری داشته باشید
+                    </p>
+                </div>
+            </div>
+          
+        </div>
+
+
+        <div class="row align-items-center justify-content-center">
+           
+            @if (Model.Any() == true)
+            {
+                @foreach (var item in Model)
+                {
+                    <partial name="_BoxSub" model="@item" />
+                }
+            }
+            else
+            {
+            <h5 class="title mb-4 text-center text-dark">موردی برای نمایش یافت نشد!</h5>
+            }
+        </div>
+
+
+    </div>
+</section>

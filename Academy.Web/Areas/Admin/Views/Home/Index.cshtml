@@ -1,0 +1,119 @@
+﻿@model ICollection<Academy.Domain.Entities.Account.User>
+@using Academy.Application.Utils.Convertors
+@{
+    ViewData["Title"] = "صفحه اصلی";
+
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+
+    <div class="row">
+     
+            <div class="col-lg-4 col-6">
+
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>@ViewData["SubscribeCount"]</h3>
+
+                        <p>اشتراکات خریداری شده</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a  class="small-box-footer">کوین گلس</a>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-6">
+
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@ViewData["SubscribeCount"]</h3>
+                        <p>خریداران اشتراک</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a asp-controller="Subscribe" asp-action="Index" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-6">
+
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@ViewData["UserCount"]</h3>
+
+                        <p>کاربران ثبت شده</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="small-box-footer">تعداد اعضای سایت</a>
+                </div>
+            </div>
+
+
+      
+
+        <div class="col-12 col-sm-6 col-md-12">
+            <h4>آخرین ثبت نام کنندگان </h4>
+            <br />
+            <table class="table table-bordered table-striped dataTable" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">نام کاربری</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ایمیل</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تلفن همراه</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">وضعیت کاربر</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تاریخ ثبت نام</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var users in Model)
+                        {
+                            <tr role="row" class="odd">
+                                <td>@users.UserName</td>
+                                <td>@users.Email</td>
+                                <td>@users.PhoneNumber</td>
+                                <td>
+                                    @if (users.IsActive == true)
+                                    {
+                                        <span class="badge badge-success">فعال</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">غیرفعال</span>
+                                    }
+                                </td>
+                                <td>@users.RegisterDate.ToShamsi()</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</section>

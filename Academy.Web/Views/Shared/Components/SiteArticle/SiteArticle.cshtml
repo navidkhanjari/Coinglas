@@ -1,0 +1,33 @@
+﻿@model ICollection<Academy.Domain.ViewModels.Article.ShowArticleViewModel>
+<section class="section bg-light" id="article">
+
+    <div class="container">
+        <div class="container mt-100 mt-60">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="section-title mb-4 pb-2">
+                        <h4 class="title mb-4">اخبار اخیر و رویدادها </h4>
+                        <p class="text-muted para-desc mx-auto mb-0">
+                            برای اطلاع از اخبار بازارهای مالی و آشنا شدن با
+                            مفاهیم پایه و مهم ارزهای دیجیتال، صفحه
+                            وبلاگ <span class="text-primary fw-bold">کوین گلس </span>
+                            در اختیار کاربران قرار گرفته است
+                        </p>
+                    </div>
+                </div>  
+            </div> 
+            <div class="row">
+                @if (Model.Any() == true)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <partial name="_BoxArticle" model="@item" />
+                    }
+                }
+                else
+                {
+                    <h5 class="title mb-4 text-center text-dark">موردی برای نمایش یافت نشد!</h5>
+                }
+            </div>
+        </div>
+</section>

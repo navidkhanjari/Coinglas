@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>پنل مدیریت | @ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <partial name="_AdminHeaderReferencesPartial" />
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @await Component.InvokeAsync("AdminHeader")
+        @await Component.InvokeAsync("AdminSideBar")
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync("AdminFooter")
+        <aside class="control-sidebar control-sidebar-dark">
+        </aside>
+    </div>
+    <partial name="_AdminFooterReferencesPartial" />
+    @RenderSection("Scripts", false)
+</body>
+</html>

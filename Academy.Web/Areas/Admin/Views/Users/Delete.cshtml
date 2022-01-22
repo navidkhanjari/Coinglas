@@ -1,0 +1,96 @@
+﻿@model Academy.Domain.ViewModels.Account.InformationUserPanelViewModel
+@using Academy.Application.Utils.Convertors
+@{
+    ViewData["Title"] = "حذف کاربر";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="header-row">
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fa fa-warning"></i> توجه!</h5>
+                <p>آیا از حذف این کاربر اطمینان دارید؟</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">اطلاعات کاربری</h3>
+                </div>
+                <form asp-area="Admin" asp-controller="Users" asp-action="Delete" class="form-horizontal" method="post">
+
+                    <input type="hidden" name="UserId" value="@ViewData["UserId"].ToString()" />
+
+                    <div class="card-body">
+                        <label>نام کاربری</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.UserName">
+                        </div>
+
+                        <label>ایمیل</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.Email">
+                        </div>
+
+                        <label>موجودی کیف پول</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.Wallet.ToString("#,0")">
+                        </div>
+
+                        <label>تاریخ ثبت نام</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.RegisterDate.ToShamsi()">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <button type="submit" class="btn btn-danger btn-block">حذف </button>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-secondary btn-block">انصراف</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

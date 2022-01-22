@@ -1,0 +1,96 @@
+﻿@model Academy.Domain.Entities.Account.Role
+@using Academy.Domain.Entities.Permissions
+@{
+    ViewData["Title"] = "ویرایش نقش";
+    List<Permission> permissions = ViewData["Permissions"] as List<Permission>;
+    List<long> SelectedPermission = ViewData["SelectedPermission"] as List<long>;
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <form asp-area="Admin" asp-controller="Roles" asp-action="Edit" class="form-horizontal">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="RoleTitle"></label>
+                                    <input asp-for="RoleTitle" class="form-control">
+                                </div>
+                                <span asp-validation-for="RoleTitle" class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10 col-md-4">
+
+                                        <label>دسترسی های نقش</label>
+                                        <ul style="list-style-type:none">
+                                            @foreach (var permission in permissions.Where(p => p.ParentId == null))
+                                            {
+                                                <li>
+                                                    <input type="checkbox" name="SelectedPermission" @((SelectedPermission.Any(p=> p == permission.Id)?"checked":"")) value="@permission.Id" /> @permission.PermissionTitle
+
+                                                    @if (permissions.Any(p => p.ParentId == permission.Id))
+                                                    {
+                                                        <ul style="list-style-type:none;margin-right:25px">
+                                                            @foreach (var sub in permissions.Where(p => p.ParentId == permission.Id))
+                                                            {
+                                                                <li>
+                                                                    <input type="checkbox" name="SelectedPermission" @((SelectedPermission.Any(p=> p == sub.Id)?"checked":"")) value="@sub.Id" /> @sub.PermissionTitle
+                                                                    @if (permissions.Any(p => p.ParentId == sub.ParentId))
+                                                                    {
+                                                                        <ul style="list-style-type:none;margin-right:45px">
+
+                                                                            @foreach (var sub2 in permissions.Where(p => p.ParentId == sub.Id))
+                                                                            {
+                                                                                <li>
+                                                                                    <input type="checkbox" name="SelectedPermission" @((SelectedPermission.Any(p=> p == sub2.Id)?"checked":"")) value="@sub2.Id" /> @sub2.PermissionTitle
+                                                                                </li>
+                                                                            }
+                                                                        </ul>
+                                                                    }
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                </li>
+                                            }
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-warning btn-block">ثبت اطلاعات</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,86 @@
+﻿@model Academy.Domain.ViewModels.Discount.EditDiscountViewModel
+@using Academy.Application.Utils.Convertors;
+@{
+    ViewData["Title"] = "ویرایش کد تخفیف";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <form method="post" asp-area="Admin" asp-controller="Discount" asp-action="Edit" class="form-horizontal">
+                    <div class="card-body">
+                        <div class="row">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Code"></label>
+                                    <input asp-for="Code" class="form-control">
+                                </div>
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="DiscountPercent"></label>
+                                    <input asp-for="DiscountPercent" class="form-control">
+                                </div>
+                                <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="UsableDiscount"></label>
+                                    <input asp-for="UsableDiscount" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="StartDate"></label>
+                                    <input asp-for="StartDate"   class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="EndDate"></label>
+                                    <input asp-for="EndDate"  class="form-control">
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-warning btn-block">ثبت اطلاعات</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

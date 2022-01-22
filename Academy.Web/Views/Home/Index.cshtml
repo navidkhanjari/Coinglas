@@ -1,0 +1,55 @@
+﻿@await Component.InvokeAsync("SiteAboutUs")
+@await Component.InvokeAsync("SiteSub")
+@await Component.InvokeAsync("SiteCourses")
+@await Component.InvokeAsync("SiteArticle")
+@{
+    ViewData["Title"]= "صفحه اصلی";
+}
+@section IndexHeader{
+    <section class="home-slider position-relative block">
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <div class="bg-home d-flex align-items-center"
+                         style="background: url('/site/images/crypto/crypto.png') center center;">
+                        <div class="bg-overlay"></div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12 text-center">
+                                    <div class="title-heading mt-4">
+
+                                        <h1 class="heading mb-3 text-white title-dark animated fadeInUpBig animation-delay-3">
+                                            آکادمی کوین گلس
+                                        </h1>
+                                        <p class="para-desc text-light para-dark mx-auto animated fadeInUpBig animation-delay-7">
+                                            ما در این مجموعه با ارائه مسیرهای صحیح برای کسب درآمد و سرمایه‌گذاری در
+                                            بازارهای مالی و ارزهای دیجیتال همراه شما هستیم.
+                                        </p>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <div class="mt-4 pt-2 animated fadeInUpBig animation-delay-11">
+                                                <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-primary mt-2">
+                                                    <i class="uil uil-user"></i> ثبت نام/ورود
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@section Header{
+    @await Component.InvokeAsync("SiteHeader")
+}
+@section Footer{
+    @await Component.InvokeAsync("SiteFooter")
+}

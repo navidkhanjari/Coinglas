@@ -1,0 +1,113 @@
+﻿@model Academy.Domain.Entities.Account.Role
+@using Academy.Domain.Entities.Permissions
+@{
+    ViewData["Title"] = "حذف نقش";
+    List<Permission> permissions = ViewData["Permissions"] as List<Permission>;
+    List<long> SelectedPermission = ViewData["SelectedPermission"] as List<long>;
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="header-row">
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fa fa-warning"></i> توجه!</h5>
+                <p>آیا از حذف @Model.RoleTitle اطمینان دارید؟</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <form asp-area="Admin" asp-controller="Roles" asp-action="Delete" class="form-horizontal" method="post">
+
+                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+                    <input type="hidden" asp-for="RoleTitle" />
+
+
+                    <div class="card-body">
+                        <label>عنوان نقش</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.RoleTitle">
+                        </div>
+                        <label>دسترسی ها</label>
+                        <div class="input-group mb-3">
+                            <ul style="list-style-type:none">
+                                @foreach (var permission in permissions.Where(p => p.ParentId == null))
+                                {
+                                    <li>
+                                        <input type="checkbox" name="SelectedPermission" @((SelectedPermission.Any(p => p == permission.Id) ? "checked" : "")) disabled value="@permission.Id" /> @permission.PermissionTitle
+
+                                        @if (permissions.Any(p => p.ParentId == permission.Id))
+                                        {
+                                            <ul style="list-style-type:none;margin-right:25px">
+                                                @foreach (var sub in permissions.Where(p => p.ParentId == permission.Id))
+                                                {
+                                                    <li>
+                                                        <input type="checkbox" name="SelectedPermission" @((SelectedPermission.Any(p => p == sub.Id) ? "checked" : "")) disabled value="@sub.Id" /> @sub.PermissionTitle
+                                                        @if (permissions.Any(p => p.ParentId == sub.ParentId))
+                                                        {
+                                                            <ul style="list-style-type:none;margin-right:45px">
+
+                                                                @foreach (var sub2 in permissions.Where(p => p.ParentId == sub.Id))
+                                                                {
+                                                                    <li>
+                                                                        <input type="checkbox" name="SelectedPermission" @((SelectedPermission.Any(p => p == sub2.Id) ? "checked" : "")) disabled value="@sub2.Id" /> @sub2.PermissionTitle
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <button type="submit" class="btn btn-danger btn-block">حذف نقش</button>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <a asp-area="Admin" asp-controller="Roles" asp-action="Index" class="btn btn-secondary btn-block">انصراف</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>

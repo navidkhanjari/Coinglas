@@ -1,0 +1,86 @@
+﻿@model Academy.Domain.ViewModels.Courses.CreateCourseEpisodeViewModel
+@{
+    ViewData["Title"] = "افزودن قسمت جدید";
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <form asp-area="Admin" asp-controller="Courses" asp-action="CreateEpisode" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row">
+                            <input type="hidden" asp-for="CourseId" value="@ViewData["CourseId"].ToString()" />
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="EpisodeTitle"></label>
+                                    <input asp-for="EpisodeTitle" class="form-control">
+                                </div>
+                                <span asp-validation-for="EpisodeTitle" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="EpisodeFileName">انتخاب فایل(*.RAR)</label>
+                                    <input asp-for="EpisodeFileName" class="form-control">
+                                </div>
+                                <span asp-validation-for="EpisodeFileName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="EpisodeTime"></label>
+                                    <input  asp-for="EpisodeTime" class="form-control">
+                                </div>
+                                <span asp-validation-for="EpisodeTime" class="text-danger"></span>
+                            </div>
+
+
+
+                            <div class="col-sm-12 col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input asp-for="IsFree" value="True" type="checkbox">
+                                        </span>
+                                    </div>
+                                    <input type="text" value="رایگان" class="form-control">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-info btn-block">ثبت اطلاعات</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

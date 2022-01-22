@@ -1,0 +1,158 @@
+﻿@model Academy.Domain.Entities.Order.Order
+@using Academy.Application.Services.Interfaces
+@inject IUserService _userService;
+@{
+    ViewData["Title"] = "فاکتور های من";
+    int i = 1;
+    var BalanceWallet = await _userService.GetBalanceUserWallet(User.Identity.Name);
+    string DiscountType = ViewBag.DiscountTypes.ToString();
+}
+
+@await Component.InvokeAsync("AccountHeader")
+
+<section class="section mt-60">
+    <div class="container mt-lg-3">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="card border-0 rounded shadow">
+                    <div class="card-body">
+                        <h5 class="text-md-start text-center">@ViewData["Title"] :</h5>
+                        <div class="invoice-table pb-4 px-3">
+                            <div class="table-responsive bg-white shadow rounded">
+                                <table class="table mb-0 table-center invoice-tb">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th scope="col" class="border-bottom text-start">ردیف </th>
+                                            <th scope="col" class="border-bottom text-start">مورد </th>
+                                            <th scope="col" class="border-bottom">تعداد</th>
+                                            <th scope="col" class="border-bottom">قیمت</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.OrderDetails.Any() == true)
+                                        {
+
+
+
+                                            @foreach (var item in Model.OrderDetails)
+                                            {
+                                                <tr>
+                                                    <th scope="row" class="text-start">@i</th>
+                                                    <td class="text-start">
+                                                        @if (item.CourseId == null)
+                                                        {
+                                                            @item.Subscribe.Title
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.Course.CourseTitle
+                                                        }
+
+                                                    </td>
+                                                    <td>1</td>
+                                                    <td>
+                                                        @if (item.CourseId == null)
+                                                        {
+                                                            @item.Subscribe.Price.ToString("#,0") <span>ریال</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.Course.CoursePrice.ToString("#,0") <span>ریال</span>
+                                                        }
+                                                    </td>
+
+                                                </tr>
+
+                                                i += 1;
+                                            }
+
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.OrderDetails.Any() == false)
+            {
+                <p class="text text-black-50">موردی برای نمایش وجود ندارد!</p>
+            }
+            @if (Model.OrderDetails.Any() == true)
+            {
+                @if (!Model.IsFinally)
+                {
+                    <div class="col-lg-4 col-md-4 ms-auto">
+
+                        <form method="post" asp-area="Account" asp-controller="MyOrders" asp-action="UseDiscount">
+                            <label>کد تخفیف</label>
+                            <input name="orderId" type="hidden" value="@Model.Id" />
+                            <input name="code" type="text" class="form-control" />
+                            <br />
+                            <input type="submit" class="btn btn-primary " value=" اعمال کد" />
+                        </form>
+                        @if (DiscountType != "")
+                        {
+                            switch (DiscountType)
+                            {
+                                case "Used":
+                                    {
+                                        <p class="text text-warning">این کد توسط شما استفاده شده است!</p>
+                                        break;
+                                    }
+                                case "Finished":
+                                    {
+                                        <p class="text text-warning">این کد به اتمام رسیده است!</p>
+                                        break;
+                                    }
+                                case "ExpierDate":
+                                    {
+                                        <p class="text text-warning">تاریخ کد معتبر نیست!</p>
+                                        break;
+                                    }
+                                case "NotFound":
+                                    {
+                                        <p class="text text-warning">کد معتبر نیست!</p>
+                                        break;
+                                    }
+                                case "Success":
+                                    {
+                                        <p class="text text-success">کد با موفقیت اعمال شد!</p>
+                                        break;
+                                    }
+
+                            }
+                        }
+
+                    </div>
+                    <div class="col-lg-8 col-md-8 ms-auto">
+                        <ul class="list-unstyled h6 fw-normal mt-4 mb-0 ms-md-5 ms-lg-4">
+                            <li class="d-flex justify-content-between ">مجموع کل :<p>@Model.OrderSum.ToString("#,0") <span>ریال</span></p></li>
+                        </ul>
+                    </div>
+                    <br />
+                    <div class="col-lg-4 col-md-4 ms-auto">
+                        @if (BalanceWallet >= Model.OrderSum)
+                        {
+                            <a href="/Account/MyOrders/FinallyOrder/@Model.Id" class="btn btn-success"> ثبت و پرداخت نهایی</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-success disabled"> ثبت و پرداخت نهایی</a>
+                            <p class="text text-danger">موجودی کیف پول شما کافی نمی باشد, میتوانید از این <a class="link-primary" asp-controller="Account" asp-action="ChargeWallet">لینک</a> اقدام به شارژ حساب خود نمایید</p>
+                        }
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

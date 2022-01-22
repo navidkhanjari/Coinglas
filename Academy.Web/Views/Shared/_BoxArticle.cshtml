@@ -1,0 +1,34 @@
+﻿@model Academy.Domain.ViewModels.Article.ShowArticleViewModel
+@using Academy.Application.FilePath;
+@using Academy.Application.Utils.Convertors;
+<div class="col-lg-4 col-md-6 mt-4 pt-2">
+    <div class="card blog rounded border-0 shadow">
+        <div class="position-relative">
+            <img src="@(FilePaths.ArticlePath + Model.ImageName)" class="card-img-top rounded-top" alt="...">
+            <div class="overlay rounded-top bg-dark"></div>
+        </div>
+  
+        <div class="card-body content">
+            <h5>
+                <a  class="card-title title text-dark">
+                 @Model.Title
+                </a>
+            </h5>
+            <p class="class=" color-silver pt-2 pb-3 card-text"">
+                @Model.ShortDescription
+            </p>
+            <div class="post-meta d-flex justify-content-between mt-3">
+                <ul class="list-unstyled mb-0">
+                   
+                </ul>
+                <a asp-controller="Articles" asp-action="NewsArticle" asp-route-slug="@Model.Slug" class="text-muted readmore">ادامه مطلب <i class="uil uil-angle-left-b align-middle"></i></a>
+            </div>
+        </div>
+        <div class="author">
+            <small class="text-light user d-block"><i class="uil uil-user"></i> کوین گلس</small>
+            <small class="text-light date">
+                <i class="uil uil-calendar-alt"></i> @Model.CreateDate.ToShamsi()
+            </small>
+        </div>
+    </div>
+</div>

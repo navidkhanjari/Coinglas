@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>coinglas | @ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
+    <meta name="keywords" content="Saas, Software, multi-uses, HTML, Clean, Modern" />
+
+    <partial name="_HeaderReferencesPartial" />
+
+</head>
+<body>
+    @RenderSection("Header", false)
+    @RenderSection("IndexHeader", false)
+    @RenderBody()
+    @RenderSection("Footer", false)
+    <a asp-controller="Home" asp-action="Index" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-primary back-to-top">
+        <i data-feather="arrow-up" class="icons"></i>
+    </a>
+    <partial name="_FooterReferencesPartial" />
+    @RenderSection("Scripts", false)
+</body>
+</html>

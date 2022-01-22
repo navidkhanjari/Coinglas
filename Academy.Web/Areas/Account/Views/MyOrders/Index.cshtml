@@ -1,0 +1,84 @@
+﻿@model ICollection<Academy.Domain.ViewModels.Orders.ShowOrderUserPanelViewModel>
+@using Academy.Application.Utils.Convertors
+@{
+    ViewData["Title"] = "فاکتور های شما";
+    int i = 1;
+}
+
+@await Component.InvokeAsync("AccountHeader")
+<section class="section mt-60">
+    <div class="container mt-lg-3">
+        <div class="row">
+            <partial name="_AccountDashbord" />
+
+            @if (Model.Any() == true)
+            {
+
+                <div class="col-md-6 mt-4 pt-2">
+                    <div class="component-wrapper rounded shadow">
+                        <div class="p-4 border-bottom">
+                            <h4 class="title mb-0">@ViewData["Title"]</h4>
+                        </div>
+
+                        <div class="p-4">
+                            <div class="table-responsive bg-white shadow rounded">
+                                <table class="table mb-0 table-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-bottom">#</th>
+                                            <th scope="col" class="border-bottom">تاریخ </th>
+                                            <th scope="col" class="border-bottom">جمع</th>
+                                            <th scope="col" class="border-bottom">وضعیت پرداخت</th>
+                                            <th scope="col" class="border-bottom">دستورات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>
+                                                    @item.CreateDate.ToShamsi()
+                                                </td>
+                                                <td>@item.OrderSum.ToString("#,0")</td>
+                                                <td>
+                                                    @if (item.IsFinally == true)
+                                                    {
+
+
+                                                        <p class="text-success">پرداخت شده</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">پرداخت نشده</p>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a href="/Account/MyOrders/ShowOrders/@item.Id" class="btn btn-secondary ">نمایش</a>
+                                        
+                                                </td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-6 mt-4 pt-2">
+                    <p>موردی برای نمایش یافت نشد!</p>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+

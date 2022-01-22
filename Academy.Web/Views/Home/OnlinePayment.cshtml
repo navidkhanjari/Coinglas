@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "نتیجه تراکنش";
+}
+
+<div class="back-to-home rounded d-none d-sm-block">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-icon btn-soft-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home icons"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a>
+</div>
+@if (ViewBag.IsSuccess == true)
+{
+    <section class="bg-home bg-light d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="text-center">
+                       
+                        <h1 class="my-4 fw-bold text-success">ممنون از خرید شما</h1>
+                        <p class="text-muted para-desc mx-auto text-success">پرداخت با موفقیت انجام شد!</p>
+                        <p>کد پیگیری: @ViewBag.code</p>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-soft-primary mt-3">برو صفحه اصلی </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="bg-home bg-light d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="text-center">
+  
+                        <p class="text-muted para-desc mx-auto text-danger">پرداخت انجام نشد!</p>
+                        
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-soft-primary mt-3">برو صفحه اصلی </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

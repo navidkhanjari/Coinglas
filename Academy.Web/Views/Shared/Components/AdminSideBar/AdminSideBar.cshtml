@@ -1,0 +1,197 @@
+﻿
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <a href="adLayout/index3.html" class="brand-link">
+        <img src="~/images/Default/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">پنل مدیریت</span>
+    </a>
+
+
+    <div class="sidebar">
+        <div>
+
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info">
+                    <a href="/Account" class="d-block">
+                        @User.Identity.Name
+                        <i class="nav-icon fa  fa-user text-secondary"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link"  asp-area="Admin" asp-controller="Home" asp-action="Index">
+                            <i class="nav-icon fa  fa-home"></i>
+                            <p>
+                               خانه
+                                
+                            </p>
+                        </a>
+                   
+                    </li>
+
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link">
+                            <i class="nav-icon fa  fa-user"></i>
+                            <p>
+                                مدیریت کاربران
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="nav-link">
+                                    <i class="fa fa-users nav-icon"></i>
+                                    <p>لیست کاربران</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Users" asp-action="DeletedUsers" class="nav-link">
+                                    <i class="fa fa-users nav-icon text-danger"></i>
+                                    <p>لیست کاربران حذف شده</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Users" asp-action="Create" class="nav-link">
+                                    <i class="fa fa-user-plus nav-icon"></i>
+                                    <p>افزودن کاربر جدید</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link">
+                            <i class="nav-icon fa  fa-user-secret"></i>
+                            <p>
+                                مدیریت نقش ها
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Roles" asp-action="Index" class="nav-link">
+                                    <i class="fa fa-key nav-icon"></i>
+                                    <p>لیست نقش ها</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link">
+                            <i class="nav-icon fa  fa-newspaper-o"></i>
+                            <p>
+                                مدیریت مقالات
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Article" asp-action="Index" class="nav-link">
+                                    <i class="fa fa-newspaper-o"></i>
+                                    <p>لیست مقالات</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Article" asp-action="DeletedArticle" class="nav-link">
+                                    <i class="fa fa-newspaper-o text-danger"></i>
+                                    <p>لیست مقالات حذف شده</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Article" asp-action="Create" class="nav-link">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                    <p>افزودن مقاله</p>
+                                </a>
+                            </li>
+
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link">
+                            <i class="nav-icon fa  fa-play-circle"></i>
+                            <p>
+                                مدیریت دوره ها
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Courses" asp-action="Index" class="nav-link">
+                                    <i class="fa fa-play"></i>
+                                    <p>لیست دوره های سایت</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Courses" asp-action="Create" class="nav-link">
+                                    <i class="fa fa-plus"></i>
+                                    <p>افزودن دوره</p>
+                                </a>
+                            </li>
+
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link">
+                            <i class="nav-icon fa  fa-btc"></i>
+                            <p>
+                                مدیریت اشتراک ها
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Subscribe" asp-action="Index" class="nav-link">
+                                    <i class="fa fa-list"></i>
+                                    <p>لیست اشتراک ها</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link">
+                            <i class="nav-icon fa  fa-tag"></i>
+                            <p>
+                                کد تخفیف
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Discount" asp-action="Index" class="nav-link">
+                                    <i class="fa fa-star"></i>
+                                    <p>لیست کد ها</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Discount" asp-action="Create" class="nav-link">
+                                    <i class="fa fa-plus"></i>
+                                    <p>ایجاد کد </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+</aside>

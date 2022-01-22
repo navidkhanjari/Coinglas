@@ -1,0 +1,143 @@
+﻿@model Academy.Domain.ViewModels.Discount.FilterDiscountViewModel
+@using Academy.Application.Utils.Convertors;
+@{
+    ViewData["Title"] = "کد های تخفیف";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="card-body">
+
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="dataTables_wrapper container-fluid dt-bootstrap4">
+                <form class="form-group" asp-area="Admin" asp-controller="Discount" asp-action="Index" method="get" id="filter-form">
+                    <input type="hidden" asp-for="Page" />
+                    <div class="dataTables_filter">
+                        <div class="form-group">
+                            <label>
+                                تعداد نمایش در هر صفحه
+                            </label>
+                            <select asp-for="TakeEntity" aria-controls="example1" class="form-control">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-9">
+
+            <div>
+                <a asp-area="Admin" asp-controller="Discount" asp-action="Create" class="btn btn-primary text-light">
+                    افزودن کد جدید
+                </a>
+            </div>
+            <hr />
+            @if (Model.Entities != null && Model.Entities.Any())
+            {
+                <table class="table table-bordered table-striped dataTable" role="grid">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">کد</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">درصد تخفیف</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تعداد </th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تاریخ شروع</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تاریخ پایان</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">دستورات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var code in Model.Entities)
+                        {
+                        <tr role="row" class="odd">
+                            <td>@code.DiscountCode</td>
+                            <td>@code.DiscountPercent</td>
+                            <td>@code.UsableCount</td>
+                            <td>@((code.StartDate!=null)?code.StartDate.Value.ToShamsi():"")</td>
+                            <td>@((code.EndDate!=null)?code.EndDate.Value.ToShamsi():"")</td>
+                            <td><a class="btn btn-warning" asp-area="Admin" asp-controller="Discount" asp-action="Edit" asp-route-Id="@code.Id">ویرایش</a></td>
+
+                        </tr>
+
+                        }
+
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+                <div class="dataTables_paginate paging_simple_numbers">
+                    <ul class="pagination">
+                        @if (Model.Page > 1)
+                        {
+                            <li class="paginate_button page-item previous">
+                                <a onclick="changePage(@(Model.Page-1))" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">
+                                    قبلی
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="paginate_button page-item previous disabled">
+                                <a aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">
+                                    قبلی
+                                </a>
+                            </li>
+                        }
+                        @for (int i = Model.StartPage; i < Model.EndPage; i++)
+                        {
+                            <li class="@(i==Model.Page?"paginate_button page-item active" : "paginate_button page-item ")">
+                                <a onclick="changePage(@(i))" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">@i</a>
+                            </li>
+                        }
+                        @if (Model.Page < Model.EndPage)
+                        {
+                            <li class="paginate_button page-item next ">
+                                <a onclick="changePage(@(Model.Page +1))" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">بعدی</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="paginate_button page-item next disabled">
+                                <a aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">بعدی</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-6 col-md-9">
+                    <p class="warning">اطلاعاتی یافت نشد!</p>
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+
+</div>
+

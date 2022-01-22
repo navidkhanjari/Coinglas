@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="1.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="1.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="1.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Academy.Data\Academy.Data.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="HtmlSanitizer" Version="4.0.199" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
+		<PackageReference Include="LazZiya.ImageResize" Version="2.0.0" />
+	</ItemGroup>
+
+</Project>

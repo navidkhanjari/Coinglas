@@ -1,0 +1,94 @@
+﻿@model ICollection<Academy.Domain.Entities.Subscribe.Subscribe>
+@{
+    ViewData["Title"] = "اشتراک ها";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="card-body">
+    <div>
+        <a asp-area="Admin" asp-controller="Subscribe" asp-action="Create" class="btn btn-primary text-light">
+            افزودن اشتراک جدید
+        </a>
+    </div>
+    <hr />
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="card-body table-responsive p-0">
+
+                    <table class="table table-bordered table-striped dataTable" role="grid">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">عنوان </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ویژگی ها</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">قیمت</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any() == true)
+                            {
+
+                                @foreach (var subscribe in Model)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            @subscribe.Title
+                                        </td>
+                                        <td>
+                                            @Html.Raw(subscribe.Description)
+                                        </td>
+                                        <td>
+                                            @subscribe.Price
+                                        </td>
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Subscribe" asp-action="Edit" asp-route-Id="@subscribe.Id" class="btn btn-warning btn-sm">ویرایش</a>
+                                            <a asp-area="Admin" asp-controller="Subscribe" asp-action="Buyers" asp-route-Id="@subscribe.Id" class="btn btn-info btn-sm">خریداران</a>
+
+                                        </td>
+                                    </tr>
+
+                                }
+
+
+
+                            }
+
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+                    @if (Model.Any() == false)
+                    {
+                        <p class="text text-lg-center text-black-50">موردی برای نمایش یافت نشد!</p>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

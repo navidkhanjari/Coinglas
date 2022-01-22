@@ -1,0 +1,22 @@
+﻿@model Academy.Domain.ViewModels.Subscribes.ShowSubscribeViewModel
+<div class="col-md-5 col-12 col-lg-3 mt-4 pt-2">
+    <div class="card pricing-rates best-plan rounded shadow text-center border-0">
+        <div class="ribbon ribbon-right ribbon-warning overflow-hidden"><span class="text-center d-block shadow small h6">OFF 50%</span></div>
+        <div class="card-body py-5">
+
+            <h6 class="title text-uppercase mb-4">
+                @Model.Title
+            </h6>
+            <div class="d-flex justify-content-center align-items-between mb-4">
+                <span class="h4 mb-0 mt-2"></span>
+                <span class="price h1 mb-0">@Model.Price.ToString("#,0")</span>
+                <span class="h4 align-self-end mb-3">ریال </span>
+            </div>
+
+            <ul class="text-right body_text">
+                @Html.Raw(Model.Description)
+            </ul>
+            <a asp-controller="Subscribe" asp-action="BuySubscribe" asp-route-Id="@Model.Id" class="btn btn-outline-primary btn-sm mt-4">خرید اشتراک </a>
+        </div>
+    </div>
+</div>

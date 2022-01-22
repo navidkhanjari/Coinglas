@@ -1,0 +1,31 @@
+﻿@model ICollection<Academy.Domain.ViewModels.Courses.ShowCourseListItemViewModel>
+
+
+    <section class="section" id="course">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="section-title mb-4 pb-2">
+                    <h4 class="title mb-4 text-center">دوره های آموزشی</h4>
+                    <p class="text-muted para-desc mb-0 mx-auto text-center">
+                        متخصصین مجموعه <span class="text-primary fw-bold">کوین گلس </span> در
+                        تلاش هستند تا با ارائه آموزش‌های بروز و جدید موقعیت مالی شما را بهبود ببخشند.
+                    </p>
+                </div>
+                <div class="row justify-content-center">
+                    @if (Model.Any() == true)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <partial name="_boxCourse" model="@item" />
+                        }
+
+                    }
+                    else
+                    {
+                        <h5 class="title mb-4 text-center text-dark">بزودی ...</h5>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>  
+           

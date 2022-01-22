@@ -1,0 +1,116 @@
+﻿@model Academy.Domain.ViewModels.Article.DetailsArticleViewModel
+@using Academy.Application.Utils.Convertors;
+@using Academy.Application.FilePath;
+@{
+    ViewData["Title"] = "جزییات مقاله";
+    string userName = ViewData["UserName"] as string;
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+                <form>
+                    <div class="card-body">
+                        <label>عنوان</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.Title">
+                        </div>
+
+                        <label>نویسنده</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-pencil-square-o"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@userName">
+                        </div>
+
+
+
+                        <label>بازدید</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.Visit">
+                        </div>
+
+                        <label>اسلاگ</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-sticky-note"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.Slug">
+                        </div>
+
+                        <label>تاریخ انتشار</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <input class="form-control" disabled value="@Model.CreateDate.ToShamsi()">
+                        </div>
+
+                        <label>تصویر</label>
+                        <div class="input-group mb-3">
+
+                            <img class="img-thumbnail" src="@(FilePaths.ArticleThumbPath + Model.ImageName)" />
+                        </div>
+
+                        <label>توضیخ مختصر</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group mb-3">
+                                <p>@Model.ShortDescription</p>
+                            </div>
+                        </div>
+
+                        <label>متن مقاله</label>
+                        <div class="input-group mb-3">
+                            <p>@Html.Raw(Model.Description)</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <a asp-area="Admin" asp-controller="Article" asp-action="Edit" asp-route-Id="@Model.Id" class="btn btn-warning btn-block">ویرایش</a>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <a asp-area="Admin" asp-controller="Article" asp-action="Index" class="btn btn-secondary btn-block">بازگشت</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+

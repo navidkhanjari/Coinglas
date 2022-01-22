@@ -1,0 +1,88 @@
+﻿@using Academy.Application.Services.Interfaces
+@inject IUserService _userService;
+
+<header id="topnav" class="defaultscroll sticky">
+    <div class="container">
+
+        <div>
+            <a class="logo">
+                <img src="/site/images/COINGLAS Logo.png" class="l-dark" height="50" alt="logo">
+                <img src="/site/images/COINGLAS Logo dark.png" class="l-light" height="50" alt="logo">
+            </a>
+        </div>
+
+
+        <div class="menu-extras">
+            <div class="menu-item">
+
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="buy-button">
+                <div target="_blank">
+                    <a asp-controller="Account" asp-action="login" class="btn btn-primary login-btn-primary">ورود </a>
+                    <a asp-controller="Account" asp-action="login" class="btn btn-light login-btn-light">ورود  </a>
+                    <a asp-controller="Account" asp-action="register" class="btn btn-primary login-btn-primary">ثبت نام </a>
+                    <a asp-controller="Account" asp-action="register" class="btn btn-light login-btn-light">ثبت نام  </a>
+                </div>
+            </div>
+
+        }
+
+        <div id="navigation">
+
+            <ul class="navigation-menu nav-light">
+                <li>
+                    <a asp-controller="Home" asp-action="Index" class="sub-menu-item">صفحه اصلی </a>
+                </li>
+
+                <li class="has-submenu parent-parent-menu-item">
+                    <a asp-controller="Courses" asp-action="Index">دوره های آموزشی </a>
+
+                </li>
+                <li class="has-submenu parent-menu-item">
+                    <a asp-controller="Articles" asp-action="Index">مقاله ها </a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <li class="has-submenu parent-menu-item">
+                        <a asp-controller="Account" asp-action="Index">@User.Identity.Name</a><span class="menu-arrow"></span>
+                        <ul class="submenu">
+                            <li><a asp-controller="Account" asp-action="Index" class="sub-menu-item">مشاهده حساب کاربری</a></li>
+                            <li><a asp-controller="Account" asp-action="ChangePassword" class="sub-menu-item"> تغییر رمز عبور </a></li>
+                            <li><a asp-controller="Account" asp-action="Wallet" class="sub-menu-item">تراکنش های حساب </a></li>
+                            <li><a href="/Account/MyOrders" class="sub-menu-item">فاکتور های من</a></li>
+                            <li><a asp-controller="Account" asp-action="ChargeWallet" class="sub-menu-item">شارژ کیف پول </a></li>
+                            <li><a asp-controller="Account" asp-action="LogOut" class="sub-menu-item">خروج از حساب کاربری </a></li>
+                            @{
+                                ViewBag.IsAdmin = await _userService.IsAdmin(User.Identity.Name);
+                            }
+                            @if (ViewBag.IsAdmin == true)
+                            {
+                                <li><a href="/Admin" class="sub-menu-item">پنل ادمین </a></li>
+
+                            }
+
+
+                        </ul>
+
+                    </li>
+
+                }        
+            </ul>
+
+        </div>
+
+    </div>
+
+</header>

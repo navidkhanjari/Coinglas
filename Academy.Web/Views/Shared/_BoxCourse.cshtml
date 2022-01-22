@@ -1,0 +1,39 @@
+﻿@model Academy.Domain.ViewModels.Courses.ShowCourseListItemViewModel
+@using Academy.Application.FilePath;
+
+<div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+    <div class="card shadow job-box rounded shadow border-0 overflow-hidden">
+        <div class="border-bottom">
+            <div class="position-relative">
+                <img src="@(FilePaths.CoursePasth + Model.ImageName)" class="img-fluid" alt="">
+                <div class="job-overlay bg-white"></div>
+            </div>
+            <ul class="list-unstyled head mb-0">
+                <li class="badge bg-danger rounded-pill"></li>
+            </ul>
+        </div>
+
+        <div class="card-body content position-relative">
+            <div class="company-detail text-center mt-3">
+                <h5 class="mb-0 text-right">
+                    <a class=" font-16 text-dark company-name">@Model.Title</a>
+                </h5>
+                <div class="">
+                    <p class=" color-silver pt-2 pb-3 card-text">
+                        در این دوره شما آموزش پرایس اکشن به سبک ال بروکس را یاد خواهید گرفت
+                        و
+                        بعد از دیدن این دوره به راحتی میتوانید با کمی تمرین ترید را شروع
+                        کنید و
+                        معاملات پرسودی داشته باشید
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <a asp-controller="Course" asp-action="BuyCourse" asp-route-Id="@Model.Id"
+                   class="btn job-box-btn btn-outline-primary">خرید دوره</a>
+                <b>@Model.Price.ToString("#,0") تومان</b>
+            </div>
+        </div>
+    </div>
+</div>

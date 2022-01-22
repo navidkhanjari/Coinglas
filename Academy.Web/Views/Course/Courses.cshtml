@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "دوره ها";
+}
+
+
+@await Component.InvokeAsync("SiteHeader")
+
+
+<section class="bg-half d-table w-100" style="background: url('/images/Default/articles-bg.jpg') center center;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next-level">
+                    <h3 class="title text-white title-dark">@ViewData["Title"]</h3>
+                    <div class="page-next">
+                        <nav aria-label="breadcrumb" class="d-inline-block">
+                            <ul class="breadcrumb bg-white rounded shadow mb-0">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">کوین گلس </a></li>
+                                <li class="breadcrumb-item"><a asp-controller="articles" asp-action="Index">مقالات </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">لیست مقالات</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 mb-4 pb-2">
+                <div class="component-wrapper rounded shadow">
+                    <div class="p-4">
+                        <div class="subcribe-form">
+                            <h5 class="title mb-4 text-center text-dark">بزودی ...</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("SiteFooter")

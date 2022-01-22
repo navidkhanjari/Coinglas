@@ -1,0 +1,88 @@
+﻿@model ICollection<Academy.Domain.ViewModels.Wallet.WalletViewModel>
+@using Academy.Application.Utils.Convertors
+@{
+    ViewData["Title"] = "تراکنش های حساب ";
+    int i = 1;
+}
+@await Component.InvokeAsync("AccountHeader")
+<section class="section mt-60">
+    <div class="container mt-lg-3">
+        @if (ViewBag.IsFinaly == true)
+        {
+            <div class="alert alert-success" role="alert">خرید شما با موفقیت انجام شد!</div>
+        }
+        <div class="row">
+            <partial name="_AccountDashbord" />
+
+            @if (Model.Any() == true)
+            {
+
+                <div class="col-md-6 mt-4 pt-2">
+                    <div class="component-wrapper rounded shadow">
+                        <div class="p-4 border-bottom">
+                            <h4 class="title mb-0">@ViewData["Title"]</h4>
+                        </div>
+
+                        <div class="p-4">
+                            <div class="table-responsive bg-white shadow rounded">
+                                <table class="table mb-0 table-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-bottom">#</th>
+                                            <th scope="col" class="border-bottom">نوع تراکنش </th>
+                                            <th scope="col" class="border-bottom">مبلغ(ریال)</th>
+                                            <th scope="col" class="border-bottom">تاریخ</th>
+                                            <th scope="col" class="border-bottom">بابت</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>
+                                                    @if (item.Type == 1)
+                                                    {
+                                                        <p class="text-success">واریز</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">برداشت</p>
+
+                                                    }
+                                                </td>
+                                                <td>@item.Amount.ToString("#,0")</td>
+                                                <td>@item.PaymentDate.ToShamsi()</td>
+
+                                                <td>
+                                                    @{
+
+                                                        string tagHref = "<a href='/Account/MyOrders/ShowOrder/" + item.Description.Replace("فاکتور شماره #", "") + "' >#</a>";
+                                                    }
+                                                    @Html.Raw(item.Description.Replace("#", tagHref))
+                                                </td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-6 mt-4 pt-2">
+                    <p>موردی برای نمایش یافت نشد!</p>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

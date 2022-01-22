@@ -1,0 +1,78 @@
+﻿@model ICollection<Academy.Domain.ViewModels.Subscribes.ShowSubscribeBuyersViewModel>
+@using Academy.Application.Utils.Convertors
+@{
+    ViewData["Title"] = "خریداران اشتراک";
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+              
+
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-bordered table-striped dataTable" role="grid">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">كد كاربري</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">نام كاربري</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">ايميل</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">شماره تماس</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">تاريخ خريد</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">اشتراك</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any() == true)
+                            {
+                                @foreach (var user in Model)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td>@user.UserId</td>
+                                        <td>@user.UserName</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.PhoneNumber</td>
+                                        <td>@user.PaymentDay.ToShamsi()</td>
+                                        @if (user.SubscribeId == 7)
+                                        {
+                                            <td><span class="badge badge-success">اشتراك يك ماهه</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="badge badge-primary">اشتراك سه ماهه</span></td>
+
+                                        }
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p>موردي براي نمايش يافت نشد!</p>
+                            }
+
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Academy.Domain.Entities.Account.Role>
+@{
+    ViewData["Title"] = "لیست نقش ها";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="card-body">
+    <div>
+        <a asp-area="Admin" asp-controller="Roles" asp-action="Create" class="btn btn-primary text-light">
+            افزودن نقش جدید
+        </a>
+    </div>
+    <hr />
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@ViewData["Title"]</h3>
+                </div>
+
+                <div class="card-body table-responsive p-0">
+
+                    <table class="table table-bordered table-striped dataTable" role="grid">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">عنوان نقش</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">دستورات</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var role in Model)
+                            {
+                                <tr role="row" class="odd">
+                                    <td>
+                                        @role.RoleTitle
+                                    </td>
+                                    <td>
+                                        <a asp-area="Admin" asp-controller="Roles" asp-action="Delete" asp-route-Id="@role.Id" class="btn btn-danger btn-sm">حذف</a>
+                                        <a asp-area="Admin" asp-controller="Roles" asp-action="Edit" asp-route-Id="@role.Id" class="btn btn-warning btn-sm">ویرایش</a>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
